@@ -29,6 +29,23 @@ resource "yandex_compute_instance" "vm-ter" {
     serial-port-enable = true
   }
   
+  metadata_startup_script = <<-EOF
+    #! /bin/bash
+
+    # Создание пользователя
+    useradd -m -s /bin/bash newuser
+    
+    # Установка пароля для пользователя
+    echo "newuser:newpassword" | chpasswd
+
+    # Добавление пользователя в группу sudo (если нужно)
+    usermod -aG sudo newuser
+  EOF
+
+  
+  
+  
+  
 ## install-docker
  provisioner "remote-exec" {
    inline = [
