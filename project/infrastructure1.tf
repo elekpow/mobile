@@ -26,6 +26,7 @@ resource "yandex_compute_instance" "vm-ter" {
 
   metadata = {
     user-data = "${file("./metadata.yml")}"
+    serial-port-enable = true
   }
   
 ## install-docker
