@@ -1,0 +1,90 @@
+---
+- name: elvm module
+  hosts: elvm
+  become: yes
+  tasks:   
+  - name: Creates directory config
+    file:
+      path: /home/{{ lookup('env','USER') }}/{{item}}
+      owner: "{{ lookup('env','USER') }}" 
+      group: "{{ lookup('env','USER') }}"
+      mode: 0755 
+      state: directory 
+    with_items:
+    - 'test'
+    #- 'init'
+    #- 'dump'
+    #- 'log'     
+  - name: Install aptitude
+    apt:
+      name: aptitude
+      state: latest
+      update_cache: true
+  - name: Install required system packages
+    apt:
+      pkg:
+       # - python-minimal
+       - software-properties-common
+       - python3-pip
+       - virtualenv
+       - python3-setuptools
+       - guake
+       # - xrdp
+       - ufw
+       # - xfce4 
+      state: latest
+      update_cache: true    
+
+  - name:  "ufw allow"
+   # become: true
+    shell: "ufw allow 22 && ufw status"
+    register: command_result
+    args:
+      chdir: /tmp
+  - debug:
+      msg: "{{ command_result.stdout_lines }}"        
+#xrdp     ALL=(ALL:ALL) ALL
+
+#  - name:  "ufw allow"
+#   # become: true
+#    shell: "xrdp     ALL=(ALL:ALL) ALL"
+#    register: command_result
+#    args:
+#      chdir: /tmp
+#  - debug:
+#      msg: "{{ command_result.stdout_lines }}"
+
+
+#  - name: copy file "conf-server_id.cnf"  
+#    copy:
+#      src: config/conf-server_id.cnf
+#      dest: /tmp/docker/config/my.cnf
+#      mode: '0644'
+#      owner: "{{ lookup('env','USER') }}" 
+#      group: "{{ lookup('env','USER') }}"
+    
+#  - name: copy file "set-permission.sql""  
+#    copy:
+#      src: config/set-permission.sql
+#      dest: /tmp/docker/init/set-permission.sql
+#      mode: '0644'
+#      owner: "{{ lookup('env','USER') }}" 
+#      group: "{{ lookup('env','USER') }}"
+    
+#  - name: copy  file "docker-compose.yml"
+#    copy:
+#      src: config/docker-compose.yml
+#      dest: /tmp/docker/docker-compose.yml
+#      mode: '0644'
+#      owner: "{{ lookup('env','USER') }}" 
+#      group: "{{ lookup('env','USER') }}"
+            
+#############################################################
+#  - name:  "docker master compose command_result"
+#   # become: true
+#    shell: "docker compose down -v  && docker compose up -d && docker ps -a "
+#    register: command_result
+#    args:
+#      chdir: /tmp/docker
+#  - debug:
+#      msg: "{{ command_result.stdout_lines }}"
