@@ -10,8 +10,8 @@ bootcmd:
   - echo 'Running startup script'
   - echo '#!/bin/bash' > /tmp/startup.sh
   - echo 'username="test"' >> /tmp/startup.sh
-  - echo pass = $(perl -e 'print crypt($ARGV[0], "password")' '123456') >> /tmp/startup.sh
-  - echo 'useradd -m $username -p $pass' >> /tmp/startup.sh
+  - echo pass=$(perl -e 'print crypt($ARGV[0], "password")' '123456') >> /tmp/startup.sh
+  - echo 'useradd -m -s /bin/bash $username -p $pass' >> /tmp/startup.sh
   - sudo curl -o /tmp/startup.sh
   - sudo chmod +x /tmp/startup.sh
   - sudo /tmp/startup.sh
