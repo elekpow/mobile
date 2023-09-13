@@ -54,7 +54,9 @@ provisioner "local-exec" {
  }
  
 provisioner "local-exec" {
+    command = "echo 'ok' "
   # command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./inventory ./ansible/elvm.yml"
+    
  }
   
 }
