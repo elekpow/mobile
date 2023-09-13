@@ -31,14 +31,15 @@ resource "yandex_compute_instance" "vm-ter" {
 ## install-docker
  provisioner "remote-exec" {
    inline = [
+    "echo 'ok' ",
     #update
-	"sudo apt-get update",
+#	"sudo apt-get update",
 	#docker
-         "curl -fsSL https://get.docker.com -o install-docker.sh",
-         "sh install-docker.sh --dry-run",
-         "sudo sh install-docker.sh",
+#         "curl -fsSL https://get.docker.com -o install-docker.sh",
+#         "sh install-docker.sh --dry-run",
+#         "sudo sh install-docker.sh",
 	#python	 
-	"sudo apt-get install python-minimal -y",	
+#	"sudo apt-get install python-minimal -y",	
     ]
     connection {
      type = "ssh"
