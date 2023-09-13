@@ -10,10 +10,9 @@ resource "yandex_compute_instance" "vm-ter" {
     cores  = 2
     memory = 2
   }
-## debian 10
+
   boot_disk {
     initialize_params {
-#      image_id = "fd8u2e47jlq81vqvg87t"
       image_id = "${var.distr}"
       type = "network-ssd"
       size = "5"
@@ -32,10 +31,13 @@ resource "yandex_compute_instance" "vm-ter" {
 ## install-docker
  provisioner "remote-exec" {
    inline = [
+    #update
 	"sudo apt-get update",
+	#docker
          "curl -fsSL https://get.docker.com -o install-docker.sh",
          "sh install-docker.sh --dry-run",
          "sudo sh install-docker.sh",
+	#python	 
 	"sudo apt-get install python-minimal -y",	
     ]
     connection {
@@ -46,32 +48,31 @@ resource "yandex_compute_instance" "vm-ter" {
    }
 }
 
-## ANSIBLE inventory
+## ANSIBLE 
 provisioner "local-exec" {
    command = " echo '[${var.hostnames[count.index]}]\n${self.network_interface.0.nat_ip_address}' >> inventory"
  }
  
-## ANSIBLE first install
 provisioner "local-exec" {
-   command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./inventory ./ansible/elvm.yml"
+  # command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./inventory ./ansible/elvm.yml"
  }
   
 }
 
 ## network
 resource "yandex_vpc_network" "network_ter" {
-  name = "net_ter[count.index]"
+  name = "net_ter"
 }
 ## network _ subnet
 resource "yandex_vpc_subnet" "subnet_ter" {
-  name           = "subnet_ter[count.index]"
+  name           = "subnet_ter"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network_ter.id
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
-###### null_resource_inventory
-  resource "null_resource" "vm-hosts" {
+## ANSIBLE rm inventory
+resource "null_resource" "inventory" {
   provisioner "local-exec" {
     command = "rm -rf ./inventory"
   }

@@ -15,8 +15,10 @@ variable "ssh_user" {
 
 variable "distr" {
   type = string
-# debian"
+# debian
   default = "fd8u2e47jlq81vqvg87t"
+  
+  
 }
 
 
