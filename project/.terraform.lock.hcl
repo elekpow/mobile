@@ -4,13 +4,13 @@
 provider "registry.terraform.io/hashicorp/null" {
   version = "3.2.1"
   hashes = [
-    "h1:wqgRvlyVIbkCeCQs+5jj6zVuQL0KDxZZtNofGqqlSdI=",
+    "h1:FbGfc+muBsC17Ohy5g806iuI1hQc4SIexpYCrQHQd8w=",
   ]
 }
 
 provider "registry.terraform.io/yandex-cloud/yandex" {
   version = "0.98.0"
   hashes = [
-    "h1:waM8z86t1/ThWO1qimYUrdkAFxB+Vovb4kxUzAnVgzE=",
+    "h1:4M09tUT96aHzDyqV6zClRJIBMbPDSdxk82JwMqGZ7Cg=",
   ]
 }
