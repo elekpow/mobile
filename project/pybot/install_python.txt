@@ -1,0 +1,14 @@
+sudo apt-get install python
+sudo apt-get install python3-pip
+sudo apt-get install python-pip
+
+pip install pyTelegramBotAPI
+
+sudo pip3 install --user pytelegrambotapi
+
+```
+
+```
+
+
+python3 pybot.py
