@@ -1,8 +1,11 @@
-sudo apt-get install python
-sudo apt-get install python3-pip
-sudo apt-get install python-pip
 
-pip install pyTelegramBotAPI
+sudo apt update
+sudo apt install -y python3 python3-pip
+
+whereis python3
+sudo ln -sfn /usr/bin/python3.7 /usr/bin/python
+
+pip3 install pyTelegramBotAPI
 
 sudo pip3 install --user pytelegrambotapi
 
