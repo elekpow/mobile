@@ -47,7 +47,7 @@ resource "yandex_compute_instance" "vm-ter" {
      type = "ssh"
      user = "${var.ssh_user}" 
      host = self.network_interface.0.nat_ip_address
-     agent = true # eval "$(ssh-agent -s)" # ssh-add ~/.ssh/id_rsa
+     agent = true # eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_rsa
    }
 }
 
