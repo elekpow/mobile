@@ -1,0 +1,10 @@
+https://habr.com/ru/companies/otus/articles/591647/
+
+пример 
+
+terraform -chdir="./environments/staging/network" init
+terraform -chdir="./environments/staging/network" apply
+terraform -chdir="./environments/staging/database" init
+terraform -chdir="./environments/staging/database" apply
+terraform -chdir="./environments/staging/application" init
+terraform -chdir="./environments/staging/application" apply
