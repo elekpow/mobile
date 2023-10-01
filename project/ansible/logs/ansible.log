@@ -3115,3 +3115,140 @@ become_user. , use become instead. This feature will be removed in version 2.8. 
 }
 2023-10-01 21:50:06,503 p=16466 u=igor |  PLAY RECAP *************************************************************************************************************
 2023-10-01 21:50:06,504 p=16466 u=igor |  51.250.88.241              : ok=4    changed=1    unreachable=0    failed=0   
+2023-10-01 23:54:40,590 p=17046 u=igor |  ERROR! You must specify a playbook file to run
+2023-10-01 23:54:52,193 p=17048 u=igor |  [DEPRECATION WARNING]: [defaults]hostfile option, The key is misleading as it can also be a list of hosts, a directory 
+or a list of paths , use [defaults] inventory=/path/to/file|dir instead. This feature will be removed in version 2.8. 
+Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-10-01 23:54:52,194 p=17048 u=igor |  [DEPRECATION WARNING]: DEFAULT_SUDO_USER option, In favor of Ansible Become, which is a generic framework. See 
+become_user. , use become instead. This feature will be removed in version 2.8. Deprecation warnings can be disabled by
+ setting deprecation_warnings=False in ansible.cfg.
+2023-10-01 23:54:52,556 p=17048 u=igor |  PLAY [elvm module] *****************************************************************************************************
+2023-10-01 23:54:52,570 p=17048 u=igor |  TASK [Gathering Facts] *************************************************************************************************
+2023-10-01 23:54:55,306 p=17048 u=igor |  ok: [51.250.7.91]
+2023-10-01 23:54:55,324 p=17048 u=igor |  TASK [Download docker script] ******************************************************************************************
+2023-10-01 23:54:56,323 p=17048 u=igor |  changed: [51.250.7.91]
+2023-10-01 23:54:56,344 p=17048 u=igor |  TASK [Docker setup] ****************************************************************************************************
+2023-10-01 23:55:28,967 p=17048 u=igor |  changed: [51.250.7.91]
+2023-10-01 23:55:28,984 p=17048 u=igor |  TASK [debug] ***********************************************************************************************************
+2023-10-01 23:55:29,038 p=17048 u=igor |  ok: [51.250.7.91] => {
+    "msg": [
+        "Illegal option --dry-run;",
+        "# Executing docker install script, commit: e5543d473431b782227f8908005543bb4389b8de",
+        "Client: Docker Engine - Community",
+        " Version:           24.0.6",
+        " API version:       1.43",
+        " Go version:        go1.20.7",
+        " Git commit:        ed223bc",
+        " Built:             Mon Sep  4 12:31:44 2023",
+        " OS/Arch:           linux/amd64",
+        " Context:           default",
+        "",
+        "Server: Docker Engine - Community",
+        " Engine:",
+        "  Version:          24.0.6",
+        "  API version:      1.43 (minimum version 1.12)",
+        "  Go version:       go1.20.7",
+        "  Git commit:       1a79695",
+        "  Built:            Mon Sep  4 12:31:44 2023",
+        "  OS/Arch:          linux/amd64",
+        "  Experimental:     false",
+        " containerd:",
+        "  Version:          1.6.24",
+        "  GitCommit:        61f9fd88f79f081d64d6fa3bb1a0dc71ec870523",
+        " runc:",
+        "  Version:          1.1.9",
+        "  GitCommit:        v1.1.9-0-gccaecfc",
+        " docker-init:",
+        "  Version:          0.19.0",
+        "  GitCommit:        de40ad0",
+        "",
+        "================================================================================",
+        "",
+        "To run Docker as a non-privileged user, consider setting up the",
+        "Docker daemon in rootless mode for your user:",
+        "",
+        "    dockerd-rootless-setuptool.sh install",
+        "",
+        "Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.",
+        "",
+        "",
+        "To run the Docker daemon as a fully privileged service, but granting non-root",
+        "users access, refer to https://docs.docker.com/go/daemon-access/",
+        "",
+        "WARNING: Access to the remote API on a privileged Docker daemon is equivalent",
+        "         to root access on the host. Refer to the 'Docker daemon attack surface'",
+        "         documentation for details: https://docs.docker.com/go/attack-surface/",
+        "",
+        "================================================================================"
+    ]
+}
+2023-10-01 23:55:29,041 p=17048 u=igor |  PLAY RECAP *************************************************************************************************************
+2023-10-01 23:55:29,042 p=17048 u=igor |  51.250.7.91                : ok=4    changed=2    unreachable=0    failed=0   
+2023-10-01 23:56:52,577 p=17089 u=igor |  [DEPRECATION WARNING]: [defaults]hostfile option, The key is misleading as it can also be a list of hosts, a directory 
+or a list of paths , use [defaults] inventory=/path/to/file|dir instead. This feature will be removed in version 2.8. 
+Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-10-01 23:56:52,578 p=17089 u=igor |  [DEPRECATION WARNING]: DEFAULT_SUDO_USER option, In favor of Ansible Become, which is a generic framework. See 
+become_user. , use become instead. This feature will be removed in version 2.8. Deprecation warnings can be disabled by
+ setting deprecation_warnings=False in ansible.cfg.
+2023-10-01 23:56:52,938 p=17089 u=igor |  PLAY [elvm module] *****************************************************************************************************
+2023-10-01 23:56:52,952 p=17089 u=igor |  TASK [Gathering Facts] *************************************************************************************************
+2023-10-01 23:56:55,251 p=17089 u=igor |  ok: [51.250.7.91]
+2023-10-01 23:56:55,268 p=17089 u=igor |  TASK [Download docker script] ******************************************************************************************
+2023-10-01 23:56:56,228 p=17089 u=igor |  ok: [51.250.7.91]
+2023-10-01 23:56:56,244 p=17089 u=igor |  TASK [Docker setup] ****************************************************************************************************
+2023-10-01 23:57:32,949 p=17089 u=igor |  changed: [51.250.7.91]
+2023-10-01 23:57:32,968 p=17089 u=igor |  TASK [debug] ***********************************************************************************************************
+2023-10-01 23:57:33,022 p=17089 u=igor |  ok: [51.250.7.91] => {
+    "msg": [
+        "Illegal option --dry-run;",
+        "# Executing docker install script, commit: e5543d473431b782227f8908005543bb4389b8de",
+        "Client: Docker Engine - Community",
+        " Version:           24.0.6",
+        " API version:       1.43",
+        " Go version:        go1.20.7",
+        " Git commit:        ed223bc",
+        " Built:             Mon Sep  4 12:31:44 2023",
+        " OS/Arch:           linux/amd64",
+        " Context:           default",
+        "",
+        "Server: Docker Engine - Community",
+        " Engine:",
+        "  Version:          24.0.6",
+        "  API version:      1.43 (minimum version 1.12)",
+        "  Go version:       go1.20.7",
+        "  Git commit:       1a79695",
+        "  Built:            Mon Sep  4 12:31:44 2023",
+        "  OS/Arch:          linux/amd64",
+        "  Experimental:     false",
+        " containerd:",
+        "  Version:          1.6.24",
+        "  GitCommit:        61f9fd88f79f081d64d6fa3bb1a0dc71ec870523",
+        " runc:",
+        "  Version:          1.1.9",
+        "  GitCommit:        v1.1.9-0-gccaecfc",
+        " docker-init:",
+        "  Version:          0.19.0",
+        "  GitCommit:        de40ad0",
+        "",
+        "================================================================================",
+        "",
+        "To run Docker as a non-privileged user, consider setting up the",
+        "Docker daemon in rootless mode for your user:",
+        "",
+        "    dockerd-rootless-setuptool.sh install",
+        "",
+        "Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.",
+        "",
+        "",
+        "To run the Docker daemon as a fully privileged service, but granting non-root",
+        "users access, refer to https://docs.docker.com/go/daemon-access/",
+        "",
+        "WARNING: Access to the remote API on a privileged Docker daemon is equivalent",
+        "         to root access on the host. Refer to the 'Docker daemon attack surface'",
+        "         documentation for details: https://docs.docker.com/go/attack-surface/",
+        "",
+        "================================================================================"
+    ]
+}
+2023-10-01 23:57:33,029 p=17089 u=igor |  PLAY RECAP *************************************************************************************************************
+2023-10-01 23:57:33,031 p=17089 u=igor |  51.250.7.91                : ok=4    changed=1    unreachable=0    failed=0   
