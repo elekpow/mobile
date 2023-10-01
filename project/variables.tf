@@ -1,30 +1,33 @@
+variable "ssh_key_private" {
+  type        = string
+  default     = "~/.ssh/id_ed25519"
+}
+
+variable "ssh_key_public" {
+  type        = string
+  default     = "~/.ssh/id_ed25519.pub"
+}
+
 variable "ssh_user" {
   type        = string
   default     = "igor"
 }
 
-variable "distr" {
-  type = string
-# debian 10
-  default = "fd8u2e47jlq81vqvg87t"
-# debian 11
-  #default = "fd8vtq76jue50g6b6tm7"
-# Ubuntu 22.04 LTS
-  #default = "fd82nvvtllmimo92uoul"
-# CentOS 7
-  #default = "fd85qh2iveusn11jcup6"
-# CentOS 8 Stream
-  #default = "fd8a9hj9ki4msmk986ub"
-###Joomla! 3.9.24
-  #default = "fd8suepikkiatm3mlbds"  
-}
-
-
 variable "hostnames" {
   default = {
     "0" = "elvm"
-   # "1" = "slave"
-   # "2" = "slave2"
+#    "1" = "slave"
+#    "2" = "slave2"
+  }
+}
+
+variable "images" {
+  type = map
+  default = {
+    "debian_10" = "fd8suc83g7bvp2o7edee"
+    "debian_11" = "fd8il24jjf1hg8d4nq7i"
+    "ubuntu_22" = "fd80bm0rh4rkepi5ksdi"
+    "centos_7" = "fd8iqpj5nifue99bshhi"
   }
 }
 

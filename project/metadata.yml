@@ -1,19 +1,9 @@
 #cloud-config
 users:
-  - name: igor
+  - name: igor  # eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_rsa
     groups: sudo
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh-authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH/NTJ9DmsqtiiQpivsKLjYOrmQ65uReDMUzfS/HobpR igor@debian
-bootcmd:
-  - echo 'Running startup script'
-  - echo '#!/bin/bash' > /tmp/startup.sh
-  - echo 'username="user"' >> /tmp/startup.sh
-  - echo pass=$(perl -e 'print crypt($ARGV[0], "password")' '123456') >> /tmp/startup.sh
-  - echo 'useradd -m -s /bin/bash $username -p $pass' >> /tmp/startup.sh
-  - sudo curl -o /tmp/startup.sh
-  - sudo chmod +x /tmp/startup.sh
-  - sudo /tmp/startup.sh
-  - sudo rm -rf /tmp/startup.sh
 

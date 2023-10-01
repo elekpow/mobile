@@ -1,2 +1,5 @@
 [elvm]
-158.160.98.140
+51.250.88.241
+
+[all:vars]
+ ansible_python_interpreter=/usr/bin/python3

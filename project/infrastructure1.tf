@@ -10,14 +10,21 @@ resource "yandex_compute_instance" "vm-ter" {
     cores  = 2
     memory = 2
   }
-
+ 
   boot_disk {
     initialize_params {
-      image_id = "${var.distr}"
+      image_id = "${var.images["ubuntu_22"]}"
       type = "network-ssd"
-      size = "5"
+      size = "10"
     }
   }
+
+# secondary_disk {
+     # auto_delete = false
+#      disk_id = "yandex_compute_disk.myhdd[*].id"
+		
+#  }
+
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet_ter.id
@@ -26,60 +33,70 @@ resource "yandex_compute_instance" "vm-ter" {
 
   metadata = {
     user-data = "${file("./metadata.yml")}"
-    serial-port-enable = true
+    serial-port-enable = 1
   }
- 
   
-## install-docker
  provisioner "remote-exec" {
    inline = [
-    "echo 'ok' ",
-    #update
-#	"sudo apt-get update",
-	#docker
-#         "curl -fsSL https://get.docker.com -o install-docker.sh",
-#         "sh install-docker.sh --dry-run",
-#         "sudo sh install-docker.sh",
-	#python	 
-#	"sudo apt-get install python-minimal -y",	
+       "ls -la",
+	# "sudo apt-get update",
+       # "curl -fsSL https://get.docker.com -o install-docker.sh",
+        #"sh install-docker.sh --dry-run",
+       # "sh install-docker.sh",
+	# "sudo apt-get install python-minimal -y",	
+       # "sudo apt-get install cryptsetup -y",
+       # "sudo apt install xrdp -y",
+
     ]
     connection {
      type = "ssh"
      user = "${var.ssh_user}" 
      host = self.network_interface.0.nat_ip_address
-     agent = true # eval "$(ssh-agent -s)" # ssh-add ~/.ssh/id_rsa
+     agent = true # eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_rsa
    }
 }
 
-## ANSIBLE 
+## ANSIBLE inventory
 provisioner "local-exec" {
    command = " echo '[${var.hostnames[count.index]}]\n${self.network_interface.0.nat_ip_address}' >> inventory"
  }
- 
+
+
 provisioner "local-exec" {
-    command = "echo 'ok' "
-  # command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./inventory ./ansible/elvm.yml"
-    
+   command = " echo '\n[all:vars]\n ansible_python_interpreter=/usr/bin/python3' >> inventory"
  }
-  
+
+
+## ANSIBLE first install
+ provisioner "local-exec" {
+   command = "sleep 30; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ./inventory ./ansible/elvm.yml"
+ }
+
 }
 
 ## network
 resource "yandex_vpc_network" "network_ter" {
-  name = "net_ter"
+  name = "net_ter[count.index]"
 }
 ## network _ subnet
 resource "yandex_vpc_subnet" "subnet_ter" {
-  name           = "subnet_ter"
+  name           = "subnet_ter[count.index]"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network_ter.id
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
-## ANSIBLE rm inventory
-resource "null_resource" "inventory" {
+###### null_resource_inventory
+  resource "null_resource" "vm-hosts" {
   provisioner "local-exec" {
     command = "rm -rf ./inventory"
   }
 }
 
+
+#resource "yandex_compute_disk" "myhdd" {
+#  name       = "myhdd"
+#  type       = "network-hdd"
+#  zone       = "ru-central1-a"
+#  size       = 1
+#}
