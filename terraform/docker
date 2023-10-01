@@ -1,0 +1,6 @@
+sudo usermod -aG docker $USER
+newgrp docker
+
+
+
+terraform apply -auto-approve
