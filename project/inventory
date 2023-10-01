@@ -1,9 +1,0 @@
-[elvm]
-<<<<<<< HEAD
-51.250.88.241
-
-[all:vars]
- ansible_python_interpreter=/usr/bin/python3
-=======
-51.250.0.45
->>>>>>> 06731536048fad79279f5eeea6443fcce3e21f63

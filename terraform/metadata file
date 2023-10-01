@@ -1,5 +1,0 @@
-write_files:
-  - content: |
-      #!/bin/bash
-    path: /tmp/test.sh
-    permissions: '0777'
