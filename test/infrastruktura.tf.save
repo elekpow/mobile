@@ -1,0 +1,39 @@
+resource "yandex_compute_instance" "elvm" {
+  name = "${var.hostnames[count.index]}"
+  platform_id = "${var.platform["v3"]}"
+  zone        = "${var.zone_data["zone_a"]}"
+  hostname = "${var.hostnames[count.index]}"
+  
+  count =6
+
+  resources {
+    core_fraction = 20
+    cores  = 2
+    memory = 2
+  }
+  
+  scheduling_policy {
+    preemptible = true
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "${var.images["debian_10"]}"
+      type = "network-ssd"
+      size = "10"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet-bastion.id 
+    nat ="${var.nat_["${var.hostnames[count.index]}"]}"
+#  adm9  ip_address = "172.16.120.254"
+  }
+ 
+  metadata = {
+    user-data = "${file("./metadata/bastion.yml")}"
+    serial-port-enable = 1
+  }  
+}
+
+
